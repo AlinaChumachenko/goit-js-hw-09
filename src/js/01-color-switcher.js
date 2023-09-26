@@ -16,13 +16,15 @@
 // function getRandomHexColor() {
 //   return `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, 0)}`;
 // }
-// // Беремо доступ до елементів\кнопок
+//-----CАМА СПРОСТИЛА ПІСЛЯ РЕПЕТИ-------
 const refs = {
     startBtn: document.querySelector('button[data-start]'),
     stopBtn: document.querySelector('button[data-stop]'),
 };
-    console.log(refs.startBtn);
-    console.log(refs.stopBtn);
+    // console.log(refs.startBtn);
+    // console.log(refs.stopBtn);
+let intervalId = null;
+
 
 refs.startBtn.addEventListener('click', onStartClick); 
 refs.stopBtn.addEventListener('click', onStopClick);
@@ -31,33 +33,61 @@ function getRandomHexColor() {
     return `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, 0)}`;
   }
 
-const timer = { 
-    intervalId: null,
-    isActive: false,
-    start() {
-        if (this.isActive) {
-            return;
-        };
-    
-        this.isActive = true;
-        this.intervalId = setInterval(() => {
-        let color = getRandomHexColor();
-        document.body.style.backgroundColor = color;
-        
-    }, 1000);   
-    },
-    stop() {
-        clearInterval(this.intervalId);
-        this.isActive = false;
-    },
-};
-
 function onStartClick (evt) {
-    timer.start();
-    
+    intervalId = setInterval(() => {
+        let color = getRandomHexColor();
+        document.body.style.backgroundColor = color;  
+    }, 1000);  
+    refs.startBtn.disabled = true;
+ 
 };
 
 function onStopClick (evt) {
-    timer.stop();
+    refs.startBtn.disabled = false;
+
+    clearInterval(intervalId);
 };
+
+//-------------ПО РЕПЕТІ------
+// const refs = {
+//     startBtn: document.querySelector('button[data-start]'),
+//     stopBtn: document.querySelector('button[data-stop]'),
+// };
+//     console.log(refs.startBtn);
+//     console.log(refs.stopBtn);
+
+// refs.startBtn.addEventListener('click', onStartClick); 
+// refs.stopBtn.addEventListener('click', onStopClick);
+
+// function getRandomHexColor() {
+//     return `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, 0)}`;
+//   }
+
+// const timer = { 
+//     intervalId: null,
+//     isActive: false,
+    
+//     start() {
+//         if (this.isActive) {
+//             return;
+//         };
+    
+//         this.isActive = true;
+//         this.intervalId = setInterval(() => {
+//         let color = getRandomHexColor();
+//         document.body.style.backgroundColor = color;
+        
+//     }, 1000);  
+//     refs.startBtn.disabled = true; 
+//     },
+//     stop() {
+//         clearInterval(this.intervalId);
+//         this.isActive = false;
+        
+        
+//     },
+    
+    
+// };
+
 
