@@ -15,6 +15,7 @@ const refs = {
 }
 
 let timer = null;
+refs.startBtn.disabled = true;
 
 
 refs.startBtn.addEventListener('click', onClickStart);
@@ -22,11 +23,12 @@ refs.startBtn.addEventListener('click', onClickStart);
 function onClickStart (evt) {
     timer = setInterval(() => {
     startTimer();
-}, 1000);    
+}, 1000); 
+  
 };
 
 function startTimer() {
-  refs.startBtn.disabled = true;
+ 
   const ms = dateInput.selectedDates[0] - Date.now();
   const timerTime = convertMs(ms);
   const { days, hours, minutes, seconds } = timerTime;
@@ -34,10 +36,12 @@ function startTimer() {
   refs.dataHours.textContent = hours;
   refs.dataMinutes.textContent = minutes;
   refs.dataSeconds.textContent = seconds;
-  refs.startBtn.disabled = true;
+  refs.startBtn.disabled = true; //true
 
   if (ms <= 1000) {
   clearInterval(timer);
+  // refs.startBtn.disabled = true;
+  
   Notiflix.Notify.success('Timer has stopped');
 }
 };
